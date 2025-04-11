@@ -31,14 +31,4 @@ jobs:
         run: |
           robot -d ./results -v HEADLESS:true -v BROWSER:chromium tests
 
-      - name: Publish Test Results
-        if: always()
-        uses: actions/upload-artifact@v2  # Tente usar v2
-        with:
-          name: playwright-report
-          path: ./results
-          if-no-files-found: ignore
-          retention-days: 2
-
-      - name: Verificar conteúdo da pasta results
-        run: ls -R ./results || echo "Pasta results não encontrada"
+ 
