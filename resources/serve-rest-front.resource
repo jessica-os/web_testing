@@ -1,42 +1,43 @@
 *** Settings ***
 Library    Browser
 Library    FakerLibrary
+Library    OperatingSystem
 
 *** Variables ***
 ${BROWSER}            chromium
 ${HEADLESS}           ${false}
 ${SITE_SERVE_REST}    https://front.serverest.dev    
-${NOME_PROD}          Fone de Ouvido Headset Gamer Havit
+${NOME_PROD}          Headset Gamer Havit
 ${DESCRIÇÃO}          DescriçãoDescriçãoDescriçãoDescriçãoDescrição
-${WIDTH}      1200     
-${HEIGHT}     800     
+${WIDTH}              1200     
+${HEIGHT}             800
+${CAMINHO_IMAGEM}     ${EXECDIR}${/}assets${/}fone.png
 
 *** Keywords ***
 Abrir o navegador
     New Browser    browser=${BROWSER}  
     ...            headless=${HEADLESS}
-    New Context   viewport={"width": ${WIDTH}, "height": ${HEIGHT}}
-    
+    New Context    viewport={"width": ${WIDTH}, "height": ${HEIGHT}}
 
 Ir para o site Serve Rest Front
-    New Page       url=${SITE_SERVE_REST} 
+    New Page    url=${SITE_SERVE_REST} 
     ${title}    Get Title    ==    Front - ServeRest
-    Log    ${title}
+    Log         ${title}
 
 Preencher os dados do novo usuário e cadastrar
-    Click             css=a[data-testid="cadastrar"]
-    Fill Text         css=input[data-testid="nome"]    Jessica Oliveira
-    ${EMAIL}       FakerLibrary.Email
+    Click               css=a[data-testid="cadastrar"]
+    Fill Text           css=input[data-testid="nome"]    Jessica Oliveira
+    ${EMAIL}            FakerLibrary.Email
     Set Global Variable    ${EMAIL}
-    Fill Text         css=input[data-testid="email"]  ${EMAIL}
-    Fill Text         css=input[data-testid="password"]  123456    
-    Check Checkbox    css=input[data-testid="checkbox"]
-    Click             css=button[data-testid="cadastrar"]
+    Fill Text           css=input[data-testid="email"]    ${EMAIL}
+    Fill Text           css=input[data-testid="password"]    123456    
+    Check Checkbox      css=input[data-testid="checkbox"]
+    Click               css=button[data-testid="cadastrar"]
 
 Conferir usuário cadastrado com sucesso
     Wait For Elements State    h1    visible
-    Get Text    h1    ==    Bem Vindo Jessica Elisa
-    Get Element States    css=button[data-testid="logout"]    validate    value & visible
+    Get Text                   h1    ==    Bem Vindo Jessica Elisa
+    Get Element States         css=button[data-testid="logout"]    validate    value & visible
 
 Logar com usuário e senha
     Fill Text      css=input[data-testid="email"]    jessicaelisateste@teste.com
@@ -51,17 +52,18 @@ Verificar se existe o usuário "Jessica Elisa"
     ${elemento}        Get Table Cell Element    css=table    "Nome"    "jessicaelisateste@teste.com"
     ${usuario_nome}    Get Text    ${elemento}    ==    Jessica Elisa
     Highlight Elements    ${elemento}
-    Take Screenshot   fullPage=${True}
+    Take Screenshot       fullPage=${True}
 
 Clicar no botão "Cadastrar" para abrir a tela para o cadastro
     Click         xpath=//a[@data-testid='cadastrarProdutos']
 
 Preencher os dados do novo produto
-    Fill Text    xpath=//input[@id='nome']    ${NOME_PROD}
-    Fill Text    css=input[data-testid="preco"]    201
-    Fill Text    xpath=//textarea[@id='description']    ${DESCRIÇÃO}
-    Fill Text    xpath=//input[@id='quantity']    505
-    Upload File By Selector        xpath=//input[@id='imagem']        .\\assets\\fone.png
+    Fill Text         xpath=//input[@id='nome']             ${NOME_PROD}
+    Fill Text         css=input[data-testid="preco"]        201
+    Fill Text         xpath=//textarea[@id='description']   ${DESCRIÇÃO}
+    Fill Text         xpath=//input[@id='quantity']         505
+    Upload File By Selector    xpath=//input[@id='imagem']    ${CAMINHO_IMAGEM}
+
 
 Clicar no botão "Cadastrar"
     Click    xpath=//button[@type='submit']

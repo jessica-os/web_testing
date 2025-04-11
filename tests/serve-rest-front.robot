@@ -34,5 +34,5 @@ Conferir o produto cadastrado
     Ir para o site Serve Rest Front
     Logar com usuário e senha
     Clicar na lista de produtos cadastrados
-    Verificar se existe o produto "Fone de Ouvido Headset Gamer Havit" na lista de Produtos
+    Verificar se existe o produto "Headset Gamer Havit" na lista de Produtos
 
