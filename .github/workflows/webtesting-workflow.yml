@@ -4,7 +4,7 @@ on: [push]
 
 jobs: 
   web-tests:  
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest  # Consider changing to ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -33,7 +33,7 @@ jobs:
 
       - name: Publish Test Results
         if: always()
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact@v3  # Try using v3 or latest
         with:
           name: playwright-report
           path: ./results
@@ -42,10 +42,3 @@ jobs:
 
       - name: Verificar conteúdo da pasta results
         run: ls -R ./results || echo "Pasta results não encontrada"
-
-
-
-  
-
-   
-
