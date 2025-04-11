@@ -40,6 +40,10 @@ jobs:
           if-no-files-found: ignore
           retention-days: 2
 
+      - name: Verificar conteúdo da pasta results
+        run: ls -R ./results || echo "Pasta results não encontrada"
+
+
 
   
 
