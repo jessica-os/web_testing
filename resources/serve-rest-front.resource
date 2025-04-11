@@ -90,7 +90,6 @@ Logar com o usuário cadastrado via API
      ${resposta}    Http    url=https://serverest.dev/login
      ...                    method=POST
      ...                    body={"email": "${EMAIL}","password": "54321"}
-     
      LocalStorage Set Item    serverest/userEmail    ${EMAIL}
      LocalStorage Set Item    serverest/userToken     ${resposta["body"]["authorization"] }
      LocalStorage Set Item    serverest/userNome      Jessica Elisa  
